@@ -55,4 +55,13 @@ public:
         }
         analogWrite(L_PWMB, speedL * 2.55); // Scale 0-100 to 0-255
     }
+    void breakHard() {
+        // Set both motors to LOW to stop them immediately
+        digitalWrite(R_AIN1, HIGH);
+        digitalWrite(R_AIN2, HIGH);
+        digitalWrite(L_BIN1, HIGH);
+        digitalWrite(L_BIN2, HIGH);
+        analogWrite(R_PWMA, 100); // Set PWM to 0 to stop the motor
+        analogWrite(L_PWMB, 100); // Set PWM to 0 to stop the motor
+    }
 };
