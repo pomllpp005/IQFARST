@@ -72,7 +72,7 @@ public:
         }
     }
 
-    void readCalibrated(uint16_t *sensorValues,bool Flip = false) {
+    void readCalibrated(uint16_t *sensorValues) {
         uint16_t rawValues[_sensorCount];
         read(rawValues);
     
@@ -92,17 +92,15 @@ public:
         }
     
         // Flip the order of the calibrated values
-        if(!Flip){
         for (uint8_t i = 0; i < _sensorCount / 2; i++) {
             uint16_t temp = sensorValues[i];
             sensorValues[i] = sensorValues[_sensorCount - 1 - i];
             sensorValues[_sensorCount - 1 - i] = temp;
         }
-        }
     }
 
-    uint16_t readLineBlack(uint16_t *sensorValues,bool Flip =false) {
-        readCalibrated(sensorValues,Flip);
+    uint16_t readLineBlack(uint16_t *sensorValues) {
+        readCalibrated(sensorValues);
     
         bool onLine = false;
         uint32_t avg = 0;
